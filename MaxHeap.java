@@ -31,12 +31,35 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
         initialized=true;
     } //end parameterized constructor
 
+     public MaxHeap(T[] entries){
+        initialized=false;
+
+        //casting
+        @SuppressWarnings("unchecked")
+        T[] tempHeap = (T[])new Comparable[entries.length + 1];
+        heap = tempHeap;
+        lastIndex = entries.length;
+        initialized=true;
+
+        //copying elemnents into heap
+        for (int i = 0; i < entries.length; i ++){
+            heap[i+1] = entries[i];
+        }
+
+        //floyd's algo, skips first half since they're leaves, and then runs through rest of indexes
+        for(int rootIndex = lastIndex / 2 ; rootIndex > 0 ; rootIndex--){
+            reheap(rootIndex);
+        }
+
+    } //end parameterized constructor
+
     public void add(T newEntry){
         checkIntegrity();
         int newIndex = lastIndex + 1;
         int parentIndex = newIndex/2;
         while ((parentIndex > 0) && newEntry.compareTo(heap[parentIndex]) > 0){
             heap[newIndex] = heap[parentIndex];
+            swapCount++;
             newIndex = parentIndex;
             parentIndex = newIndex/2;
         } //end while loop
