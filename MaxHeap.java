@@ -63,8 +63,27 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
     } //end removeMax
 
     private void reheap(int index){
-        
-    }
+        checkIntegrity();
+        int rootIndex = index;
+        int leftChildIndex = rootIndex*2;
+
+        while(leftChildIndex <= lastIndex){ //checking if leftChildIndex is a leaf node or not
+            int largerChildIndex = leftChildIndex;
+            int rightChildIndex = leftChildIndex + 1;
+
+            if(rightChildIndex <= lastIndex && heap[rightChildIndex].compareTo(heap[leftChildIndex]) > 0){
+                largerChildIndex = rightChildIndex;
+            } //switch if the rightChild is bigger than left and if it exists
+            if(heap[rootIndex].compareTo(heap[largerChildIndex]) < 0){
+                swap(rootIndex, largerChildIndex);
+                rootIndex = largerChildIndex;
+                leftChildIndex = rootIndex*2;
+            }
+            else{
+                break;
+            }
+        }
+    } //end reheap method
 
     public T getMax(){
         checkIntegrity();
@@ -118,10 +137,14 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
             int newCapacity = (heap.length-1) * 2;
             checkCapacity(newCapacity);
             heap = Arrays.copyOf(heap, newCapacity + 1); 
-        } //end ensureCapacity
-    }
+        } 
+    } //end ensureCapacity
 
     private void swap(int index1, int index2){
+        T temp = heap[index1]; //placeholder for index1's data since we're overwriting it after
+        heap[index1] = heap[index2];
+        heap[index2] = temp;
 
-    }
+        swapCount++; //increment swap every time we use this method
+    } //end swap
 }
