@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 import java.io.*;
 
 public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterface<T> {
@@ -47,11 +47,33 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
     } //end add
 
     public T removeMax(){
+        checkIntegrity();
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        T root = heap[1];
+        heap[1] = heap[lastIndex];
+        heap[lastIndex] = null;
+        lastIndex--;
 
+        if(lastIndex > 1){
+            reheap(1);
+        }
+        return root;
     } //end removeMax
 
-    public T getMax(){
+    private void reheap(int index){
         
+    }
+
+    public T getMax(){
+        checkIntegrity();
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        else{
+            return heap[1];
+        }
     }
 
     public boolean isEmpty(){
@@ -63,7 +85,11 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
     } //end getSize
 
     public void clear(){
-
+        checkIntegrity();
+        while(!isEmpty()){
+            heap[lastIndex] = null;
+            lastIndex--;
+        }
     } //end clear
 
     public void checkCapacity(int capacity){
@@ -87,6 +113,15 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
     } //end check
 
     public void ensureCapacity(){
-        
+        checkIntegrity();
+        if(lastIndex >= heap.length-1){ // -1 because we don't use index 0
+            int newCapacity = (heap.length-1) * 2;
+            checkCapacity(newCapacity);
+            heap = Arrays.copyOf(heap, newCapacity + 1); 
+        } //end ensureCapacity
+    }
+
+    private void swap(int index1, int index2){
+
     }
 }
