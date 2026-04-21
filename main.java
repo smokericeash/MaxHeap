@@ -10,13 +10,13 @@ public class main {
         int choice = keyboard.nextInt();
 
         if(choice==1){
-            System.out.println("gay");
+            System.out.println("gay"); //choice 1
         }
         else if(choice==2){  
-            System.out.println("gay");
+            System.out.println("gay"); //choice 2
         }
         else{
-            System.out.println("You did not input a correct number, please try again.");
+            System.out.println("You did not input a correct number, please try again."); //if user puts any other # other than 1 and 2
         }   
     }
 }
