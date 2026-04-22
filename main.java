@@ -34,8 +34,8 @@ public class main {
                 totalOptSwaps += optHeap.getSwapCount();
             }
             //print out results
-            System.out.println("Average swaps for sequential:" + (totalSeqSwaps/20));
-            System.out.println("Average swaps for optimanl:" + (totalOptSwaps/20));
+            System.out.println("Average swaps for series of insertion:" + (totalSeqSwaps/20));
+            System.out.println("Average swaps for optimal method:" + (totalOptSwaps/20));
             System.out.println("");
         } //end of choice 1
 
@@ -66,8 +66,37 @@ public class main {
             totalOptSwaps += optHeap.getSwapCount();
 
 
-            System.out.println("Average swaps for sequential:" + totalSeqSwaps);
-            System.out.println("Average swaps for optimal:" + totalOptSwaps);
+            System.out.print("Heap built using series of insertions: ");
+            //printing out first ten integers before removal
+            seqHeap.printFirstTen();
+            System.out.println("Number of swaps:" + seqHeap.getSwapCount());
+
+            //remvoing the 10
+            for(int i = 0 ; i < 10 ; i ++){
+                seqHeap.removeMax();
+            }
+
+            //printing out first ten AFTER 10 removals
+            System.out.print("Heap after 10 removals: ");
+            seqHeap.printFirstTen();
+            System.out.println("");
+
+
+            
+            //printing out heap method using Floyd's algo
+            System.out.print("Heap built using optimal method: ");
+            //printing out first ten integers before removal
+            optHeap.printFirstTen();
+            System.out.println("Number of swaps:" + optHeap.getSwapCount());
+
+            //remvoing the 10
+            for(int i = 0 ; i < 10 ; i ++){
+                optHeap.removeMax();
+            }
+
+            //printing out first ten AFTER 10 removals
+            System.out.print("Heap after 10 removals: ");
+            optHeap.printFirstTen();
             System.out.println("");
         } //end of choice 2
 

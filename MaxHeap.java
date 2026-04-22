@@ -170,4 +170,19 @@ public final class MaxHeap<T extends Comparable<? super T>> implements MaxHeapIn
 
         swapCount++; //increment swap every time we use this method
     } //end swap
+
+    public void printFirstTen(){
+        for(int i = 1 ; i <=10 && i <= lastIndex; i++){
+            //printing out each element for the first 10
+            System.out.print(heap[i]);
+
+            //checking and adding commas
+            if(i < 10 && i < lastIndex){
+                System.out.print(", ");
+            }
+
+        }
+
+        System.out.println("");
+    }
 }
